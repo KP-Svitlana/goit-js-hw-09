@@ -4,10 +4,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const startBtn = document.querySelector('button[data-start]');
 const input = document.querySelector('#datetime-picker');
-const days = document.querySelector('span[data-days]');
-const hours = document.querySelector('span[data-hours]');
-const minutes = document.querySelector('span[data-hours]');
-const seconds = document.querySelector('span[data-seconds]');
+const daysEl = document.querySelector('span[data-days]');
+const hoursEl = document.querySelector('span[data-hours]');
+const minutesEl = document.querySelector('span[data-minutes]');
+const secondsEl = document.querySelector('span[data-seconds]');
 
 const options = {
   enableTime: true,
@@ -22,7 +22,6 @@ const options = {
 startBtn.disabled = true;
 
 input.addEventListener('focus', onInputClick);
-startBtn.addEventListener('click', onStartBtnClick);
 
 function onInputClick() {
   flatpickr('[type="text"]', options);
@@ -33,23 +32,23 @@ function getCheckDate(selectedDate) {
     Notify.failure('Please choose a date in the future');
   } else {
     startBtn.disabled = false;
-    getFillData(selectedDate);
+    onStartTimer(selectedDate);
   }
 }
 
-function onStartBtnClick() {
-  const intervalId = setInterval(getFillData, 1000);
-}
-
-function getFillData(sd) {
-  const ms = Date.parse(sd) - Date.now();
-
-  const results = convertMs(ms);
-
-  days.textContent = addLeadingZero(results.days);
-  hours.textContent = addLeadingZero(results.hours);
-  minutes.textContent = addLeadingZero(results.minutes);
-  seconds.textContent = addLeadingZero(results.minutes);
+function onStartTimer(sd) {
+  startBtn.addEventListener('click', () => {
+    setInterval(() => {
+      startBtn.disabled = true;
+      input.disabled = true;
+      let ms = Date.parse(sd) - Date.now();
+      let results = convertMs(ms);
+      daysEl.textContent = addLeadingZero(results.days);
+      hoursEl.textContent = addLeadingZero(results.hours);
+      minutesEl.textContent = addLeadingZero(results.minutes);
+      secondsEl.textContent = addLeadingZero(results.seconds);
+    }, 1000);
+  });
 }
 
 function convertMs(ms) {
