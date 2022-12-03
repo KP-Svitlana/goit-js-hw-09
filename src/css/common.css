@@ -16,3 +16,20 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.field {
+  border: 2px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #341bb6;
+  padding: 5px;
+  background-color: #9e8fe8;
+  color: beige;
+}
