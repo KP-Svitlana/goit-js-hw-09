@@ -21,11 +21,7 @@ const options = {
 
 startBtn.disabled = true;
 
-input.addEventListener('focus', onInputClick);
-
-function onInputClick() {
-  flatpickr('[type="text"]', options);
-}
+flatpickr('[type="text"]', options);
 
 function getCheckDate(selectedDate) {
   if (Date.parse(selectedDate) < options.defaultDate.getTime()) {
