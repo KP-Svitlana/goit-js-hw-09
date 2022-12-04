@@ -17,7 +17,7 @@ function onFormSabmit(e) {
 }
 
 function getPromisesArray(amount) {
-  for (i = 1; i <= amount; i += 1) {
+  for (let i = 1; i <= amount; i += 1) {
     promises.push(i);
   }
 }
