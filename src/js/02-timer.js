@@ -38,11 +38,15 @@ function getCheckDate(selectedDate) {
 
 function onStartTimer(sd) {
   startBtn.addEventListener('click', () => {
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       startBtn.disabled = true;
       input.disabled = true;
       let ms = Date.parse(sd) - Date.now();
       let results = convertMs(ms);
+      if (ms <= 0) {
+        clearInterval(intervalId);
+        return;
+      }
       daysEl.textContent = addLeadingZero(results.days);
       hoursEl.textContent = addLeadingZero(results.hours);
       minutesEl.textContent = addLeadingZero(results.minutes);
